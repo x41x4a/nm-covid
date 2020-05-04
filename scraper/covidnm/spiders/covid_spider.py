@@ -15,8 +15,10 @@ class CovidSpider(scrapy.Spider):
 
     for content in response.css('div[class = "container"]'):
       yield {
-        'newCases': content.css('li:contains("new cas")::text').getall(),
+        #'newCases': content.css('li:contains("new cas")::text').getall(),
         'date': content.css('span[class=published]::text').get(),
+        'BernalilloCountyM': content.css('li:contains("new cases in Bernalillo County")::text').getall(),
+        'BernalilloCountyS': content.css('li:contains("new case in Bernalillo County")::text').getall(),
       }
 
     next_page = response.css('div.alignleft a::attr(href)').get()
