@@ -17,15 +17,15 @@ class CovidSpider(scrapy.Spider):
 
     for content in response.css('div[class = "container"]'):
       for county in counties:
-        #countyM = county + 'M'
-        #countyS = county + 'S'
+        countyM = county + 'M'
+        countyS = county + 'S'
         county_mult_msg = 'new cases in ' + county + ' County'
         county_single_msg = 'new case in ' + county + ' County'
         yield {
           'date': content.xpath('//div[@class="container"]//span[@class="published"]/text()').get(),
-          #'county': county,
-          'mult_value': content.xpath('//div[@class="container"]//li[contains(text(), $msg)]', msg=county_mult_msg).getall(),
-          'single_value': content.xpath('//div[@class="container"]//li[contains(text(), $msg)]', msg=county_single_msg).getall(),
+          'county': county,
+          'countyM': content.xpath('//div[@class="container"]//li[contains(text(), $msg)]', msg=county_mult_msg).getall(),
+          'countyS': content.xpath('//div[@class="container"]//li[contains(text(), $msg)]', msg=county_single_msg).getall(),
 
         #'BernalilloCountyM': content.css('li:contains("new cases in Bernalillo County")::text').getall(),
         #'BernalilloCountyS': content.css('li:contains("new case in Bernalillo County")::text').getall(),
