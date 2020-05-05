@@ -16,22 +16,22 @@ class CovidSpider(scrapy.Spider):
       yield response.follow(link, self.parse)
 
     for content in response.css('div[class = "container"]'):
-      for county in counties:
-        countyM = county + 'M'
-        countyS = county + 'S'
-        county_mult_msg = 'new cases in ' + county + ' County'
-        county_single_msg = 'new case in ' + county + ' County'
-        yield {
-          'date': content.xpath('//div[@class="container"]//span[@class="published"]/text()').get(),
-          'county': county,
-          'countyM': content.xpath('//div[@class="container"]//li[contains(text(), $msg)]', msg=county_mult_msg).getall(),
-          'countyS': content.xpath('//div[@class="container"]//li[contains(text(), $msg)]', msg=county_single_msg).getall(),
+      #for county in counties:
+        #countyM = county + 'M'
+        #countyS = county + 'S'
+        #county_mult_msg = 'new cases in ' + county + ' County'
+        #county_single_msg = 'new case in ' + county + ' County'
+      yield {
+        'date': content.xpath('//div[@class="container"]//span[@class="published"]/text()').get(),
+          #'county': county,
+          #'countyM': content.xpath('//div[@class="container"]//li[contains(text(), $msg)]', msg=county_mult_msg).getall(),
+          #'countyS': content.xpath('//div[@class="container"]//li[contains(text(), $msg)]', msg=county_single_msg).getall(),
 
-        #'BernalilloCountyM': content.css('li:contains("new cases in Bernalillo County")::text').getall(),
-        #'BernalilloCountyS': content.css('li:contains("new case in Bernalillo County")::text').getall(),
-        #'McKinleyCountyM': content.css('li:contains("new cases in McKinley County")::text').getall(),
-        #'McKinleyCountyS': content.css('li:contains("new case in McKinley County")::text').getall(),
-        }
+        'BernalilloCountyM': content.css('li:contains("new cases in Bernalillo County")::text').getall(),
+        'BernalilloCountyS': content.css('li:contains("new case in Bernalillo County")::text').getall(),
+        'McKinleyCountyM': content.css('li:contains("new cases in McKinley County")::text').getall(),
+        'McKinleyCountyS': content.css('li:contains("new case in McKinley County")::text').getall(),
+      }
         # print(countyM)
 
     next_page = response.css('div.alignleft a::attr(href)').get()
