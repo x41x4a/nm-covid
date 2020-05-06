@@ -8,7 +8,11 @@
 import scrapy
 
 
-class CovidnmItem(scrapy.Item):
+class NewCases(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    date = scrapy.Field()
+    county_name = scrapy.Field()
+    mult_count = scrapy.Field()
+    single_count = scrapy.Field()
     pass
