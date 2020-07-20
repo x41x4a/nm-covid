@@ -33,6 +33,8 @@ class CovidSpider(scrapy.Spider):
         'McKinleyCountyS': content.css('li:contains("new case in McKinley County")::text').getall(),
         'EddyCountyM': content.css('li:contains("new cases in Eddy County")::text').getall(),
         'EddyCountyS': content.css('li:contains("new case in Eddy County")::text').getall(),
+        'ChavesCountyM': content.css('li:contains("new cases in Chaves County")::text').getall(),
+        'ChavesCountyS': content.css('li:contains("new case in Chaves County")::text').getall(),
       }
         # print(countyM)
 
